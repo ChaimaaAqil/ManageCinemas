@@ -1,6 +1,8 @@
 package ma.emsi.cinema.entities;
 
 import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,12 +26,15 @@ public class Projection {
 	private Date dateProjection;
 	private double prix;
 	@ManyToOne
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Salle salle;
 	@ManyToOne
 	private Film film;
 	@OneToMany(mappedBy = "projection")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Collection<Ticket> tickets;
 	@ManyToOne
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Seance seance;
 	
 
